@@ -1,3 +1,4 @@
+import { RecipesService } from './recipes.service';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipe.model';
 
@@ -8,24 +9,18 @@ import { Recipe } from './recipe.model';
 })
 export class RecipesPage implements OnInit {
 
-  recipes: Recipe[] = [
-    {
-      id: 'r1',
-      title: 'Apple Pie',
-      imageUrl: 'https://www.inspiredtaste.net/wp-content/uploads/2019/10/Homemade-Apple-Pie-Recipe-6-1200.jpg',
-      ingredients: ['Apple', 'Flour', 'Sugar', 'Honey']
-    },
-    {
-      id: 'r2',
-      title: 'Fried Rice',
-      imageUrl: 'https://therecipecritic.com/wp-content/uploads/2019/07/easy_fried_rice.jpg',
-      ingredients: ['Rice', 'Egg', 'Sugar', 'Salt']
-    }
-  ];
+  recipes: Recipe[];
 
-  constructor() { }
+  constructor(
+    private recipesService: RecipesService
+  ) { }
 
   ngOnInit() {
+    this.loadAllRecipes();
+  }
+
+  loadAllRecipes() {
+    this.recipes = this.recipesService.getAllRecipes();
   }
 
 }
