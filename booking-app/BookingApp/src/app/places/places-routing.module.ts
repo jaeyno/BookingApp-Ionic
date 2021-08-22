@@ -1,3 +1,5 @@
+import { OffersPage } from './offers/offers.page';
+import { DiscoverPage } from './discover/discover.page';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PlacesPage } from './places.page';
@@ -9,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'discover',
-    loadChildren: () => import('./discover/discover.module').then( m => m.DiscoverPageModule),
+    component: DiscoverPage,
     children: [
       {
         path: ':placeId',
@@ -19,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'offers',
-    loadChildren: () => import('./offers/offers.module').then( m => m.OffersPageModule),
+    component: OffersPage,
     children: [
       {
         path: 'new',
