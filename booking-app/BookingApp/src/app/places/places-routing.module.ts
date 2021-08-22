@@ -11,31 +11,11 @@ const routes: Routes = [
   },
   {
     path: 'discover',
-    component: DiscoverPage,
-    children: [
-      {
-        path: ':placeId',
-        loadChildren: () => import('./discover/place-detail/place-detail.module').then( m => m.PlaceDetailPageModule)
-      },
-    ]
+    loadChildren: () => import('./discover/discover.module').then(m => m.DiscoverPageModule)
   },
   {
     path: 'offers',
-    component: OffersPage,
-    children: [
-      {
-        path: 'new',
-        loadChildren: () => import('./offers/new-offer/new-offer.module').then( m => m.NewOfferPageModule)
-      },
-      {
-        path: 'edit/:placeId',
-        loadChildren: () => import('./offers/edit-offer/edit-offer.module').then( m => m.EditOfferPageModule)
-      },
-      {
-        path: ':placeId',
-        loadChildren: () => import('./offers/offer-bookings/offer-bookings.module').then( m => m.OfferBookingsPageModule)
-      }
-    ]
+    loadChildren: () => import('./offers/offers.module').then(m => m.OffersPageModule)
   },
 ];
 
