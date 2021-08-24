@@ -27,13 +27,27 @@ export class PlaceDetailPage implements OnInit {
         this.navCtrl.navigateBack('/places/discover');
         return;
       }
-      this.place = this.placesService.getPlaces(param.get("placeId"));
+      this.place = this.placesService.getPlaces(param.get('placeId'));
     });
   }
 
   onBookPlace() {
     // this.navCtrl.navigateBack('/places/discover');
-    this.modalCtrl.create({component: CreateBookingComponent}).then(modal => modal.present());
+    this.modalCtrl
+      .create({
+        component: CreateBookingComponent,
+        componentProps: {selectedPlace: this.place}
+      })
+      .then(modal => {
+        modal.present();
+        return modal.onDidDismiss();
+      })
+      .then(result => {
+        console.log(result);
+        if (result.role === 'confirm') {
+          console.log('Booked!');
+        }
+      });
   }
 
 }
