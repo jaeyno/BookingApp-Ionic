@@ -7,7 +7,7 @@ export class AuthService {
 
   private userIsAuthenticated = false;
 
-  get _userIsAuthenticated() {
+  get kuserIsAuthenticated() {
     return this.userIsAuthenticated;
   }
 
