@@ -1,7 +1,8 @@
+import { CreateBookingComponent } from './../../../bookings/create-booking/create-booking.component';
 import { PlacesService } from './../../places.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { Place } from '../../place.model';
 
 @Component({
@@ -11,26 +12,28 @@ import { Place } from '../../place.model';
 })
 export class PlaceDetailPage implements OnInit {
 
-  place: Place
+  place: Place;
 
   constructor(
     private route: ActivatedRoute,
     private navCtrl: NavController,
-    private placesService: PlacesService
+    private placesService: PlacesService,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(param => {
       if (!param.has('placeId')) {
         this.navCtrl.navigateBack('/places/discover');
-        return
+        return;
       }
       this.place = this.placesService.getPlaces(param.get("placeId"));
-    })
+    });
   }
 
   onBookPlace() {
-    this.navCtrl.navigateBack('/places/discover');
+    // this.navCtrl.navigateBack('/places/discover');
+    this.modalCtrl.create({component: CreateBookingComponent}).then(modal => modal.present());
   }
 
 }
